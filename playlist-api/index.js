@@ -19,7 +19,7 @@ app.get('/playlist', (req, res) => {
 app.post('/playlist', (req, res) => {
     playlist.push(req.body);
     res.json({
-        message: "Success",
+        message: "Add a song to playlist",
         song: req.body
     });
 });
@@ -32,6 +32,7 @@ app.get('/nowplaying', (req, res) => {
     } else {
         res.json({
             message: "Now playing",
+            track: nowPlayingIndex+1,
             song: nowPlaying
         })
     }
@@ -45,9 +46,18 @@ app.get('/play', (req, res) => {
 
     res.json({
         message: "Play",
+        track: nowPlayingIndex+1,
         song: nowPlaying
     })
 });
+
+app.get('/pause', (req, res) => {
+    res.json({
+        message: "Pause",
+        track: nowPlayingIndex+1,
+        song: nowPlaying
+    })
+})
 
 app.get('/stop', (req, res) => {
     nowPlaying = null;
@@ -66,6 +76,7 @@ app.get('/next', (req, res) => {
     nowPlaying = playlist[nowPlayingIndex]
     res.json({
         message: "Next",
+        track: nowPlayingIndex+1,
         song: nowPlaying
     })
 })
