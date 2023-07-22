@@ -1,7 +1,7 @@
 let playlist = [
-    { title: 'Always', artist: ['Daniel Caesar'], album: 'NEVER ENOUGH' },
-    { title: 'Pluto Projector ', artist: ['Rex Orange County'], album: 'Pony' },
-    { title: "IT'S YOU", artist: ['MAX', 'Keshi'], album: "IT'S YOU (feat. Keshi)" },
+    { title: 'Always', artist: ['Daniel Caesar'], album: 'NEVER ENOUGH', playCount: 0 },
+    { title: 'Pluto Projector ', artist: ['Rex Orange County'], album: 'Pony', playCount: 0 },
+    { title: "IT'S YOU", artist: ['MAX', 'Keshi'], album: "IT'S YOU (feat. Keshi)", playCount: 0 },
 ];
 
 let nowPlayingIndex = 0;
@@ -12,14 +12,20 @@ export function show() {
 }
 
 export function addToPlaylist(song) {
-    playlist.push(song);
+    const _song = {
+        title: song.title,
+        artist: song.artist,
+        alert: song.album,
+        playCount: 0
+    }
+    playlist.push(_song);
     return({
         message: "Add a song to playlist",
         song: song
     })
 }
 
-export function nowPlaying() {
+export function now() {
     if (nowPlaying === null) {
         return({ message: "No music is playing" })
     } else {
@@ -31,10 +37,15 @@ export function nowPlaying() {
     }
 }
 
+function playFromStart() {
+    nowPlayingIndex = 0;
+    playlist[nowPlayingIndex].playCount++
+    nowPlaying = playlist[nowPlayingIndex]
+}
+
 export function play() {
     if (nowPlaying === null) {
-        nowPlayingIndex = 0;
-        nowPlaying = playlist[nowPlayingIndex]
+        playFromStart()
     }
 
     return({
@@ -66,6 +77,7 @@ export function next() {
         nowPlayingIndex = 0
     }
     
+    playlist[nowPlayingIndex].playCount++
     nowPlaying = playlist[nowPlayingIndex]
     return({
         message: "Next",

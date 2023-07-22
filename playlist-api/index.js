@@ -13,7 +13,7 @@ app.route('/playlist')
     })
 
 app.get('/nowplaying', (req, res) => {
-    res.json(playlist.nowPlaying());
+    res.json(playlist.now());
 })
 
 app.get('/play', (req, res) => {
