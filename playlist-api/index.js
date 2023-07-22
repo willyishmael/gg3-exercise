@@ -12,6 +12,10 @@ app.route('/playlist')
         res.json(playlist.addToPlaylist(req.body))
     })
 
+app.get('/sortPlaylist', (req, res) => {
+    res.json(playlist.showMostPlayed());
+})
+
 app.get('/nowplaying', (req, res) => {
     res.json(playlist.now());
 })

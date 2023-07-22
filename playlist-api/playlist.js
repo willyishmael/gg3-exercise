@@ -1,7 +1,7 @@
 let playlist = [
-    { title: 'Always', artist: ['Daniel Caesar'], album: 'NEVER ENOUGH', playCount: 0 },
-    { title: 'Pluto Projector ', artist: ['Rex Orange County'], album: 'Pony', playCount: 0 },
-    { title: "IT'S YOU", artist: ['MAX', 'Keshi'], album: "IT'S YOU (feat. Keshi)", playCount: 0 },
+    { title: 'Always', artist: ['Daniel Caesar'], album: 'NEVER ENOUGH', playCount: 1 },
+    { title: 'Pluto Projector ', artist: ['Rex Orange County'], album: 'Pony', playCount: 17 },
+    { title: "IT'S YOU", artist: ['MAX', 'Keshi'], album: "IT'S YOU (feat. Keshi)", playCount: 9 },
 ];
 
 let nowPlayingIndex = 0;
@@ -9,6 +9,18 @@ let nowPlaying = null;
 
 export function show() {
     return(playlist);
+}
+
+function sortPlaylist(playlist, desc) {
+    return playlist.sort((a, b) => {
+        const countA = a.playCount;
+        const countB = b.playCount;
+        return desc ? countB - countA : countA - countB;
+    });
+}
+
+export function showMostPlayed() {
+    return(sortPlaylist(playlist, true));
 }
 
 export function addToPlaylist(song) {
